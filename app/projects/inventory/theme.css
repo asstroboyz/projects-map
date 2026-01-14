@@ -1,0 +1,55 @@
+.inventory-theme {
+  --bg-main: #0f172a;
+  --bg-card: #111827;
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --accent: #38bdf8;
+
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.inventory-header {
+  background: linear-gradient(
+    to right,
+    rgba(15, 23, 42, 0.9),
+    rgba(2, 6, 23, 0.9)
+  );
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.inventory-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+}
+
+.inventory-header nav a {
+  margin-left: 24px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.inventory-header nav a:hover {
+  color: var(--accent);
+}
+
+.inventory-main {
+  padding: 48px 24px;
+}
+
+.inventory-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.inventory-footer {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}

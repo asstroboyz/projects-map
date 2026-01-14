@@ -8,8 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "System Weaver",
-  description: "Personal portfolio of System Weaver",
+  title: "Portofolio",
+  description: "Personal portfolio",
 };
 
 export default function RootLayout({
