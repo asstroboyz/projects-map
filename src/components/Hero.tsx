@@ -1,4 +1,25 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+
+
+const LOCAL_IMAGE = "/foto/me.jpg";
+const FALLBACK_IMAGE =
+  "https://lh3.googleusercontent.com/aida-public/AB6AXuDloz2NUJXREihx1k3tqDVYPXpY27Hs-y4iS4jqTiuFyDZo8UBuw_ZuXMWwtrceopxapUPxuZZZUKn6CceFH_Jz-tKzvUPp76nzA5QxnRWk18KT59Grs7TOTOcMMkODYIAqsv9HKd4_hQie4wH-rr3YBmq11k5ksPb0Tm7GmqaWChBqcxqCvcWGQfdq8EZMKIiRfbAibV1oDVBPE2UFHRq9EJckQHLHplXqZa2rsK_zwEwb555E8q2hQF9iqclZB8qa6pnKLllYhVA";
+
+
 export default function Hero() {
+
+  const [bgImage, setBgImage] = useState(FALLBACK_IMAGE);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = LOCAL_IMAGE;
+
+    img.onload = () => setBgImage(LOCAL_IMAGE);
+    img.onerror = () => setBgImage(FALLBACK_IMAGE);
+  }, []);
   return (
     <section
       id="journey"
@@ -7,10 +28,7 @@ export default function Hero() {
       {/* background blur */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-30 blur-sm"
-        style={{
-          backgroundImage:
-            'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDloz2NUJXREihx1k3tqDVYPXpY27Hs-y4iS4jqTiuFyDZo8UBuw_ZuXMWwtrceopxapUPxuZZZUKn6CceFH_Jz-tKzvUPp76nzA5QxnRWk18KT59Grs7TOTOcMMkODYIAqsv9HKd4_hQie4wH-rr3YBmq11k5ksPb0Tm7GmqaWChBqcxqCvcWGQfdq8EZMKIiRfbAibV1oDVBPE2UFHRq9EJckQHLHplXqZa2rsK_zwEwb555E8q2hQF9iqclZB8qa6pnKLllYhVA")',
-        }}
+        style={{ backgroundImage: `url("${bgImage}")` }}
       />
 
       <div className="relative z-10 grid md:grid-cols-2 gap-12 max-w-[1400px] mx-auto">
@@ -45,10 +63,7 @@ export default function Hero() {
           <div className="absolute inset-0 bg-block-bg rounded-xl -rotate-6 scale-105" />
           <div
             className="relative aspect-[4/5] rounded-xl bg-cover bg-center border border-border-subtle"
-            style={{
-              backgroundImage:
-                'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDloz2NUJXREihx1k3tqDVYPXpY27Hs-y4iS4jqTiuFyDZo8UBuw_ZuXMWwtrceopxapUPxuZZZUKn6CceFH_Jz-tKzvUPp76nzA5QxnRWk18KT59Grs7TOTOcMMkODYIAqsv9HKd4_hQie4wH-rr3YBmq11k5ksPb0Tm7GmqaWChBqcxqCvcWGQfdq8EZMKIiRfbAibV1oDVBPE2UFHRq9EJckQHLHplXqZa2rsK_zwEwb555E8q2hQF9iqclZB8qa6pnKLllYhVA")',
-            }}
+            style={{ backgroundImage: `url("${bgImage}")` }}
           />
         </div>
       </div>
