@@ -31,4 +31,12 @@ export const projects = [
     image: "/project-posyandu.png",
     repo: "https://github.com/asstroboyz/Sistem-Informasi-Manajemen-Posyandu-Ceria-Pekalongan-Selatan"
   },
+  {
+    tag: "Peminjaman",
+    title: "Sistem Informasi Peminjaman Alat",
+    slug: "peminjaman",
+    desc: "Monitoring app for inventory",
+    image: "/projects/peminjaman-smk.png",
+    repo: "https://github.com/asstroboyz/Sistem-Informasi-Manajemen-Posyandu-Ceria-Pekalongan-Selatan"
+  },
 ];
