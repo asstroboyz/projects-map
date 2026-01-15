@@ -11,7 +11,8 @@ export default function Projects() {
       id="projects"
       className="relative py-32 px-6 md:px-20 bg-gradient-to-b from-black via-[#0b0f0e] to-black"
     >
-      <div className="max-w-screen-2xl mx-auto">
+      <div className="max-w-[1400px] w-full mx-auto">
+
         {/* Header */}
         <div className="mb-20 max-w-3xl">
           <span className="text-accent-gold text-sm uppercase tracking-widest">

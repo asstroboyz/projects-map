@@ -6,7 +6,7 @@ export default function Footer() {
           Asstroboyz
         </span>
         <p className="text-text-dark-secondary text-sm">
-          © 2024 Digital Chronicles. Crafted with purpose.
+          © {new Date().getFullYear()} Asstroboyz. Crafted with purpose.
         </p>
       </div>
     </footer>

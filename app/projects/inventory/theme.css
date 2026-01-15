@@ -1,14 +1,14 @@
 .inventory-theme {
-  --bg-main: #0f172a;
-  --bg-card: #111827;
-  --text-main: #e5e7eb;
-  --text-muted: #9ca3af;
-  --accent: #38bdf8;
+  --bg-main: #ffffff;
+  --bg-card: #ffffff;
+  --text-main: #000000;
+  --text-muted: #6b7280;
+  --accent: #2563eb;
 
   background: var(--bg-main);
   color: var(--text-main);
-  font-family: Inter, system-ui, sans-serif;
 }
+
 
 .inventory-header {
   background: linear-gradient(
@@ -40,12 +40,13 @@
   padding: 48px 24px;
 }
 
-.inventory-card {
+/* .inventory-card {
   background: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 14px;
   padding: 24px;
-}
+  @apply bg-white rounded-xl p-5 shadow-sm;
+} */
 
 .inventory-footer {
   padding: 24px;

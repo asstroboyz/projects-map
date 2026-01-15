@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 
 
@@ -61,10 +62,33 @@ export default function Hero() {
         {/* RIGHT IMAGE */}
         <div className="relative w-full max-w-[420px] mx-auto -rotate-3 hover:rotate-0 transition">
           <div className="absolute inset-0 bg-block-bg rounded-xl -rotate-6 scale-105" />
-          <div
+          {/* <div
             className="relative aspect-[4/5] rounded-xl bg-cover bg-center border border-border-subtle"
             style={{ backgroundImage: `url("${bgImage}")` }}
+          /> */}
+          <motion.div
+            drag
+            dragElastic={0.35}
+            dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98, cursor: "grabbing" }}
+            animate={{ rotate: [-1, 1, -1] }}
+            transition={{
+              type: "spring",
+              stiffness: 200,
+              damping: 18,
+              mass: 0.6,
+              rotate: {
+                repeat: Infinity,
+                repeatType: "mirror",
+                duration: 6,
+                ease: "easeInOut",
+              },
+            }}
+            className="relative aspect-[4/5] rounded-xl bg-cover bg-center border border-border-subtle cursor-grab"
+            style={{ backgroundImage: `url("${bgImage}")` }}
           />
+
         </div>
       </div>
     </section>

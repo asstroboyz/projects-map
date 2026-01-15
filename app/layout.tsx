@@ -7,19 +7,16 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-export const metadata: Metadata = {
-  title: "Portofolio",
-  description: "Personal portfolio",
-};
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
+    <html lang="en" className="overflow-x-hidden">
+      <body
+        className={`${inter.variable} antialiased overflow-x-hidden`}
+      >
         {children}
       </body>
     </html>
