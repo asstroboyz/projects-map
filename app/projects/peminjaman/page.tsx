@@ -49,7 +49,7 @@ export default function PeminjamanPage() {
         ))}
       </div>
 
-  
+
       <div className="absolute bottom-0 left-0 right-0 h-[120px] z-[5] pointer-events-none bg-gradient-to-t from-black/80 to-transparent" />
 
       {/* ================= CONTENT ================= */}
@@ -94,7 +94,7 @@ export default function PeminjamanPage() {
         </div>
       </div>
 
-    
+
       <style jsx global>{`
         .rain-drop {
           position: absolute;
@@ -168,7 +168,7 @@ function RoleCard({
         hover:-translate-y-1 hover:shadow-2xl
       "
     >
-   
+
       <div
         className={`
           absolute inset-0 opacity-0 group-hover:opacity-100
@@ -177,18 +177,30 @@ function RoleCard({
         `}
       />
 
-   
+
       <div className="relative z-10">
         <div className="text-3xl mb-4">{icon}</div>
         <h2 className="text-xl font-semibold">{title}</h2>
         <p className="text-sm text-slate-400 mt-1">{desc}</p>
 
-        <div className="mt-6 inline-flex items-center gap-2 text-sm text-indigo-400 group-hover:text-indigo-300">
+        <span
+          className="
+    inline-flex items-center gap-2
+    px-3 py-1 mt-6
+    rounded-full text-xs font-medium
+    bg-indigo-500/15 text-indigo-400
+    border border-indigo-500/30
+    transition-all
+    group-hover:bg-indigo-500/25
+    group-hover:text-indigo-300
+  "
+        >
           Masuk
           <span className="transition-transform group-hover:translate-x-1">
             →
           </span>
-        </div>
+        </span>
+
       </div>
     </a>
   );
