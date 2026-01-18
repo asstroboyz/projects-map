@@ -4,7 +4,7 @@ export const projects = [
     title: "Sistem Informasi Arus Kas",
     slug: "arus-kas",
     desc: "Cash flow system built with CodeIgniter 4...",
-    image: "/project-arus-kas.png", // lo bisa ambil screenshot
+    image: "/projects/peminjaman-smk.png", 
     repo: "https://github.com/asstroboyz/arus_kas_sampling"
   },
   {
@@ -12,7 +12,7 @@ export const projects = [
     title: "Inventaris Pengadaan Barang",
     slug: "inventory",
     desc: "Inventory management for BPS Kota Pekalongan",
-    image: "/project-inventaris.png",
+    image: "/projects/peminjaman-smk.png",
     repo: "https://github.com/asstroboyz/Inventaris_Pengadaan"
   },
   {
@@ -20,7 +20,7 @@ export const projects = [
     title: "Turbo Repo CRUD",
     slug: "turbo",
     desc: "Clean architecture simple UI project",
-    image: "/project-turbo-repo.png",
+    image: "/projects/peminjaman-smk.png",
     repo: "https://github.com/asstroboyz/Turbo-Repo-CRUD-Project"
   },
   {
@@ -28,7 +28,7 @@ export const projects = [
     title: "Sistem Informasi Posyandu Ceria",
     slug: "posyandu",
     desc: "Monitoring app for health",
-    image: "/project-posyandu.png",
+    image: "/projects/peminjaman-smk.png",
     repo: "https://github.com/asstroboyz/Sistem-Informasi-Manajemen-Posyandu-Ceria-Pekalongan-Selatan"
   },
   {
