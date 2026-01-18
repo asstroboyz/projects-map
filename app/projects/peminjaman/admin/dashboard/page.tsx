@@ -1,95 +1,70 @@
 "use client";
 
-import {
-  GrCalendar,
-  GrCheckmark,
-  GrClose,
-  GrInProgress,
-} from "react-icons/gr";
 import { useDashboardData } from "../_components/useDashboardData";
+import BarChart from "../_components/charts/BarChart";
+import PieChart from "../_components/charts/PieChart";
 
 export default function AdminDashboard() {
   const data = useDashboardData();
-
   if (!data) return null;
 
+  // ⬅️ HARUS DI SINI
+  const barData = data.topBarang.map((b) => ({
+    label: b.name,
+    value: b.value,
+  }));
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* HEADER */}
       <div>
-        <p className="text-sm text-gray-500">Selamat Datang Kembali,</p>
-        <h1 className="text-2xl font-bold">Administrator</h1>
+        <p className="text-sm text-slate-400">
+          Data per {data.tanggal}
+        </p>
+        <h1 className="text-2xl font-semibold">
+          Dashboard Administrator
+        </h1>
       </div>
 
-      {/* STAT */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <StatCard title="SEDANG DIPINJAM" value={data.sedangDipinjam} color="blue" icon={<GrInProgress />} />
-        <StatCard title="SUDAH DIKEMBALIKAN" value={data.dikembalikan} color="green" icon={<GrCheckmark />} />
-        <StatCard title="RUSAK / HILANG" value={data.rusak} color="red" icon={<GrClose />} />
-        <StatCard title="HARI INI" value={data.tanggal} color="dark" icon={<GrCalendar />} />
+      {/* STATS */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Stat title="Sedang Dipinjam" value={data.sedangDipinjam} />
+        <Stat title="Dikembalikan" value={data.dikembalikan} />
+        <Stat title="Rusak / Hilang" value={data.rusak} />
       </div>
 
       {/* CHART */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* BAR */}
-        <div className="bg-white rounded-xl border p-5">
-          <h3 className="font-semibold mb-6">
-            Top Barang yang Sering Dipinjam
-          </h3>
-
-          <div className="h-48 flex items-end gap-4">
-            {data.topBarang.map((b) => (
-              <div key={b.name} className="flex-1 text-center">
-                <div
-                  className="bg-blue-600 rounded-lg mx-auto transition-all"
-                  style={{ height: `${b.value * 28}px` }}
-                />
-                <p className="text-xs mt-2">{b.name}</p>
-              </div>
-            ))}
-          </div>
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border">
+          <h3 className="font-semibold mb-4">Top Barang Dipinjam</h3>
+          <BarChart data={barData} />
         </div>
 
-        {/* PIE */}
-        <div className="bg-white rounded-xl border p-5 flex flex-col items-center">
-          <h3 className="font-semibold mb-6 self-start">
-            Persentase Peminjaman
-          </h3>
-
-          <div className="w-44 h-44 rounded-full bg-slate-800 flex items-center justify-center text-white">
-            {data.topBarang[0].name}
-          </div>
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border">
+          <h3 className="font-semibold mb-4">Highlight</h3>
+          <PieChart
+            label={data.topBarang[0]?.name}
+            value={data.topBarang[0]?.value}
+          />
         </div>
-      </div>
-
-      {/* INFO */}
-      <div className="bg-white rounded-xl border p-4">
-        <h3 className="font-semibold mb-2">Informasi Terbaru</h3>
-        <p className="text-sm text-gray-500 italic">
-          Belum ada aktivitas terbaru untuk ditampilkan.
-        </p>
       </div>
     </div>
   );
 }
 
-/* ================= */
+/* ===== STAT CARD ===== */
 
-function StatCard({ title, value, color, icon }: any) {
-  const map: any = {
-    blue: "border-blue-500 text-blue-600",
-    green: "border-green-500 text-green-600",
-    red: "border-red-500 text-red-600",
-    dark: "border-slate-700 text-slate-700",
-  };
-
+function Stat({
+  title,
+  value,
+}: {
+  title: string;
+  value: number;
+}) {
   return (
-    <div className={`bg-white rounded-xl border-l-4 p-4 flex justify-between items-center ${map[color]}`}>
-      <div>
-        <p className="text-xs font-semibold">{title}</p>
-        <p className="text-xl font-bold">{value}</p>
-      </div>
-      <div className="text-2xl">{icon}</div>
+    <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border">
+      <p className="text-sm text-slate-400">{title}</p>
+      <p className="text-3xl font-semibold mt-2">{value}</p>
     </div>
   );
 }

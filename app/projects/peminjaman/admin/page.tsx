@@ -1,9 +1,5 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import AdminDashboard from "./dashboard/page";
-
-
-
-export default function AdminPeminjamanDashboardPage() {
-  return <AdminDashboard />;
+export default function AdminPage() {
+  redirect("/projects/peminjaman/admin/dashboard");
 }

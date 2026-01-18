@@ -1,14 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getAll, seedIfEmpty } from "../../lib/peminjamanCache";
 
-type DashboardData = {
+/* ================= TYPES ================= */
+
+export type TopBarang = {
+  name: string;
+  value: number;
+};
+
+export type DashboardData = {
   sedangDipinjam: number;
   dikembalikan: number;
   rusak: number;
   tanggal: string;
-  topBarang: { name: string; value: number }[];
+  topBarang: TopBarang[];
 };
+
+/* ================= HOOK ================= */
 
 const STORAGE_KEY = "admin-dashboard-data";
 
@@ -16,43 +26,52 @@ export function useDashboardData() {
   const [data, setData] = useState<DashboardData | null>(null);
 
   useEffect(() => {
-    const cached = sessionStorage.getItem(STORAGE_KEY);
+    seedIfEmpty();
 
+    const cached = localStorage.getItem(STORAGE_KEY);
     if (cached) {
       setData(JSON.parse(cached));
       return;
     }
 
+    const peminjaman = getAll();
+
+    // =====================
+    // DUMMY CHART DATA
+    // =====================
+    const dummyTopBarang: TopBarang[] = [
+      { name: "Laptop", value: 12 },
+      { name: "Proyektor", value: 8 },
+      { name: "Kamera", value: 5 },
+      { name: "Tablet", value: 3 },
+    ];
+
     const generated: DashboardData = {
-      sedangDipinjam: rand(0, 8),
-      dikembalikan: rand(1, 12),
-      rusak: rand(0, 3),
+      sedangDipinjam: peminjaman.filter(
+        (p: any) => p.status === "approved"
+      ).length,
+
+      dikembalikan: peminjaman.filter(
+        (p: any) => p.status === "dikembalikan"
+      ).length,
+
+      rusak: peminjaman.filter(
+        (p: any) => p.kondisi === "rusak" || p.kondisi === "hilang"
+      ).length,
+
       tanggal: formatDate(new Date()),
-      topBarang: shuffle([
-        { name: "Laptop", value: rand(2, 8) },
-        { name: "Proyektor", value: rand(1, 5) },
-        { name: "Arduino Kit", value: rand(1, 5) },
-        { name: "Multimeter", value: rand(0, 4) },
-        { name: "Soldering Station", value: rand(0, 3) },
-      ]),
+
+      topBarang: dummyTopBarang,
     };
 
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(generated));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(generated));
     setData(generated);
   }, []);
 
   return data;
 }
 
-/* ================= utils ================= */
-
-function rand(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function shuffle<T>(arr: T[]) {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
+/* ================= UTILS ================= */
 
 function formatDate(date: Date) {
   return date.toLocaleDateString("id-ID", {

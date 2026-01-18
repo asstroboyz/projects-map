@@ -1,50 +1,67 @@
-"use client";
+import {
+  GrCalendar,
+  GrCheckmark,
+  GrClose,
+  GrInProgress,
+} from "react-icons/gr";
+import type { DashboardData } from "./useDashboardData";
+import { ReactNode } from "react";
 
-import { useEffect, useState } from "react";
-import { getAll, seedIfEmpty } from "../../lib/peminjamanCache";
+type Props = {
+  data: DashboardData;
+};
 
-export default function PeminjamanStats() {
-  const [data, setData] = useState<any[]>([]);
-
-  useEffect(() => {
-    seedIfEmpty();
-    setData(getAll());
-  }, []);
-
-  const count = (status: string) =>
-    data.filter((d) => d.status === status).length;
-
+export default function PeminjamanStats({ data }: Props) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <Stat label="Total" value={data.length} />
-      <Stat label="Pending" value={count("pending")} />
-      <Stat label="Approved" value={count("approved")} />
-      <Stat label="Rejected" value={count("rejected")} />
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+      <Stat
+        title="Sedang Dipinjam"
+        value={data.sedangDipinjam}
+        icon={<GrInProgress />}
+      />
+      <Stat
+        title="Dikembalikan"
+        value={data.dikembalikan}
+        icon={<GrCheckmark />}
+      />
+      <Stat
+        title="Rusak / Hilang"
+        value={data.rusak}
+        icon={<GrClose />}
+      />
+      <Stat
+        title="Hari Ini"
+        value={data.tanggal}
+        icon={<GrCalendar />}
+      />
     </div>
   );
 }
 
-function Stat({ label, value }: any) {
+/* ================= SUB COMPONENT ================= */
+
+type StatProps = {
+  title: string;
+  value: number | string;
+  icon: ReactNode;
+};
+
+function Stat({ title, value, icon }: StatProps) {
   return (
-    <div
-      className="rounded-xl p-4"
-      style={{
-        background: "var(--bg-card)",
-        border: "1px solid var(--border)",
-      }}
-    >
-      <p
-        className="text-sm"
-        style={{ color: "var(--text-muted)" }}
-      >
-        {label}
-      </p>
-      <p
-        className="text-2xl font-bold"
-        style={{ color: "var(--text-primary)" }}
-      >
-        {value}
-      </p>
+    <div className="bg-white rounded-xl p-5 border shadow-sm">
+      <div className="flex justify-between items-center">
+        <div>
+          <p className="text-xs uppercase text-slate-500">
+            {title}
+          </p>
+          <p className="text-3xl font-semibold text-slate-800">
+            {value}
+          </p>
+        </div>
+        <div className="text-2xl text-slate-400">
+          {icon}
+        </div>
+      </div>
     </div>
   );
 }
