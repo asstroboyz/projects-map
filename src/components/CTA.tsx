@@ -1,39 +1,56 @@
 
 "use client";
 
+import { Chip } from "@material-tailwind/react";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { Send } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
 
 const LOCAL_IMAGE = "/foto/me.jpg";
 const FALLBACK_IMAGE =
   "https://lh3.googleusercontent.com/aida-public/AB6AXuDloz2NUJXREihx1k3tqDVYPXpY27Hs-y4iS4jqTiuFyDZo8UBuw_ZuXMWwtrceopxapUPxuZZZUKn6CceFH_Jz-tKzvUPp76nzA5QxnRWk18KT59Grs7TOTOcMMkODYIAqsv9HKd4_hQie4wH-rr3YBmq11k5ksPb0Tm7GmqaWChBqcxqCvcWGQfdq8EZMKIiRfbAibV1oDVBPE2UFHRq9EJckQHLHplXqZa2rsK_zwEwb555E8q2hQF9iqclZB8qa6pnKLllYhVA";
 
 function InputWave({ children }: { children: React.ReactNode }) {
+  const [isWave, setIsWave] = useState(false);
+
+  const handleClick = () => {
+    setIsWave(true);
+    setTimeout(() => setIsWave(false), 1000);
+  };
+
   return (
-    <div className="relative group">
+    <div className="relative group" onClick={handleClick}>
       {children}
 
       {/* underline base */}
       <span className="pointer-events-none absolute left-0 bottom-0 h-[1px] w-full bg-white/20" />
 
-      <span
-        className="
-    pointer-events-none
-    absolute left-0 bottom-0
-    h-[2px] w-full
-    transform origin-center scale-x-0
-    bg-accent-gold
-    shadow-[0_0_12px_rgba(212,175,55,0.65)]
-    transition-transform duration-500 ease-[cubic-bezier(.4,0,.2,1)]
-    group-focus-within:scale-x-100
-  "
-      />
+      <motion.svg
+        className="pointer-events-none absolute left-0 bottom-0 w-full h-[2px]"
+        viewBox="0 0 100 2"
+        preserveAspectRatio="none"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: isWave ? 1 : 0 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        style={{ transformOrigin: "center" }}
+      >
+        <motion.path
+          d={isWave ? "M0,1 Q25,0 50,1 T100,1" : "M0,1 L100,1"}
+          stroke="#D4AF37"
+          strokeWidth="2"
+          fill="none"
+          filter="drop-shadow(0 0 12px rgba(212,175,55,0.65))"
+          animate={{ d: isWave ? "M0,1 Q25,0 50,1 T100,1" : "M0,1 L100,1" }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        />
+      </motion.svg>
 
     </div>
   );
 }
 export default function ContactSection() {
   const [img, setImg] = useState(FALLBACK_IMAGE);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const i = new Image();
@@ -41,6 +58,23 @@ export default function ContactSection() {
     i.onload = () => setImg(LOCAL_IMAGE);
     i.onerror = () => setImg(FALLBACK_IMAGE);
   }, []);
+
+  const handleSubmit = () => {
+    const name = (document.querySelector('input[placeholder="Your name"]') as HTMLInputElement)?.value;
+    const email = (document.querySelector('input[placeholder="Your email"]') as HTMLInputElement)?.value;
+    const subject = (document.querySelector('input[placeholder="Subject"]') as HTMLInputElement)?.value;
+    const message = (document.querySelector('textarea') as HTMLTextAreaElement)?.value;
+
+    const mailto = `
+mailto:yourgmail@gmail.com
+?subject=${encodeURIComponent(subject || "Contact from portfolio")}
+&body=${encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\n${message}`
+    )}
+  `;
+
+    window.location.href = mailto;
+  };
 
 
 
@@ -186,14 +220,20 @@ export default function ContactSection() {
               </InputWave>
 
               <button
-                type="submit"
+                onClick={() => handleSubmit()}
                 className="
-                  mt-8 inline-flex h-12 px-12 items-center justify-center
-                  rounded-full border border-accent-gold/40
-                  text-accent-gold font-semibold
-                  transition-all hover:bg-accent-gold hover:text-black
-                "
+    cursor-pointer
+    bg-transparent
+    border border-accent-gold/50
+    text-accent-gold
+    hover:bg-accent-gold hover:text-white
+    transition-all
+    px-6 py-3
+    rounded-full
+    flex items-center gap-2
+  "
               >
+                <Send size={16} />
                 Send Message
               </button>
             </form>

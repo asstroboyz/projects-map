@@ -162,8 +162,8 @@ export default function Tools() {
         {/* CENTER NODE */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
           <div className="px-10 py-6 rounded-xl text-center bg-black/40 border border-white/30 shadow-[0_0_80px_rgba(255,215,0,0.18)]">
-            <h2 className="text-4xl font-bold">Languages</h2>
-            <p className="text-sm text-white/70">of Creation</p>
+            <h2 className="text-4xl font-bold">Technologies</h2>
+            <p className="text-sm text-white/70">I Work With</p>
           </div>
         </div>
 
@@ -209,8 +209,8 @@ export default function Tools() {
   const MobileGrid = () => (
     <div className="lg:hidden px-6">
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold">Languages</h2>
-        <p className="text-white/70">of Creation</p>
+        <h2 className="text-4xl font-bold">Technologies</h2>
+        <p className="text-sm text-white/70">I Work With</p>
       </div>
 
       <div className="grid grid-cols-2 gap-6">

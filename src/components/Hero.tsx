@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Download, Folder } from "lucide-react";
 
 
 
@@ -36,27 +37,70 @@ export default function Hero() {
         {/* LEFT */}
         <div className="flex flex-col gap-6 text-center md:text-left">
           <span className="text-accent-gold tracking-widest text-sm uppercase">
-            The Narrative Unfurls
+            Software Engineer · System Builder
           </span>
 
           <h1 className="text-6xl md:text-8xl font-heading font-bold">
-            Weaving <br />
-            <span className="text-accent-gold">Digital Destinies.</span>
+            Designing <br />
+            <span className="text-accent-gold">Systems That Work.</span>
           </h1>
 
           <p className="text-text-dark-secondary text-xl max-w-xl">
-            I am a System Weaver, crafting intricate digital ecosystems where
-            code flows like narrative.
+            I build real-world digital systems — from backend architecture
+            to practical user-facing applications.
           </p>
 
+
           <div className="flex gap-4 justify-center md:justify-start">
-            <button className="h-14 px-8 bg-accent-gold text-background-dark font-bold rounded-lg hover:scale-105 transition">
-              Begin the Tale
-            </button>
-            <button className="h-14 px-8 border border-border-subtle rounded-lg hover:bg-block-bg transition">
-              Read My Chronicle
-            </button>
+            <motion.button
+              whileHover={{
+                scale: 1.06,
+                boxShadow: "0 0 24px rgba(212,175,55,0.45)",
+              }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: "spring", stiffness: 300, damping: 18 }}
+              onClick={() =>
+                document.getElementById("projects")?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
+              className="
+    h-14 px-8
+    bg-accent-gold text-background-dark font-bold
+    rounded-lg
+    flex items-center gap-2
+  "
+            >
+              <Folder size={18} />
+              View Projects
+            </motion.button>
+
+
+            <motion.a
+              href="/cv/Risdandi-Ganda-Gunawan-CV.pdf"
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: "rgba(212,175,55,0.08)",
+              }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: "spring", stiffness: 280, damping: 20 }}
+              className="
+    h-14 px-8
+    border border-border-subtle
+    rounded-lg
+    flex items-center gap-2
+    text-white
+  "
+            >
+              <Download size={18} />
+              Download CV
+            </motion.a>
+
           </div>
+
         </div>
 
         {/* RIGHT IMAGE */}
