@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { cubicBezier, motion } from "framer-motion";
 import Link from "next/link";
 import { projects } from "@/lib/projects";
 import { FaArrowCircleRight } from "react-icons/fa";
@@ -16,7 +16,7 @@ const container = {
     },
   },
 };
-
+const cinematicEase = cubicBezier(0.16, 1, 0.3, 1);
 const card = {
   hidden: {
     opacity: 0,
@@ -29,7 +29,7 @@ const card = {
     filter: "blur(0px)",
     transition: {
       duration: 0.9,
-      ease: [0.16, 1, 0.3, 1], // cinematic easing
+      ease: cinematicEase, // cinematic easing
     },
   },
 };
